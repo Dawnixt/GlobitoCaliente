@@ -1,0 +1,12 @@
+Nombre: Globito caliente
+Jugadores: 2
+Modo de juego:
+Ambos jugadores tienen un globo y le tiene que dar clicks hasta que crean que el globo esta a 
+punto de estallar el que mas cerca se quede gana hay un globito a cada lado .
+Para mas refencias hay un juego parecido en MarioParty
+Links to wapos:
+Server:
+https://docs.microsoft.com/es-es/aspnet/signalr/overview/getting-started/tutorial-getting-started-with-signalr
+
+UWP:
+https://social.technet.microsoft.com/wiki/contents/articles/33550.real-time-chat-uwp-application-using-azure-mobile-app-and-signalr.aspx
