@@ -10,3 +10,8 @@ https://docs.microsoft.com/es-es/aspnet/signalr/overview/getting-started/tutoria
 
 UWP:
 https://social.technet.microsoft.com/wiki/contents/articles/33550.real-time-chat-uwp-application-using-azure-mobile-app-and-signalr.aspx
+
+Que es lo que haria el server: Pues lo que haria es enviar los globos vacios
+
+
+Tenemos una clase Partida en la que estaria los puntos, 
