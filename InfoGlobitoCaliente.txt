@@ -14,4 +14,4 @@ https://social.technet.microsoft.com/wiki/contents/articles/33550.real-time-chat
 Que es lo que haria el server: Pues lo que haria es enviar los globos vacios
 
 
-Tenemos una clase Partida en la que estaria los puntos, 
+Tenemos una clase Partida en la que estaria los puntos tambien estaria el numero de veces que le tendra que dar
