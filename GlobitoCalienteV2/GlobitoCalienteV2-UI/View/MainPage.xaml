@@ -5,16 +5,22 @@
     xmlns:local="using:GlobitoCalienteV2_UI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:GlobitoCalienteV2_UI.ViewModel"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.DataContext>
+        <vm:clsMainPageVM></vm:clsMainPageVM>
+    </Page.DataContext>
+    
     <RelativePanel>
 
         <Image x:Name="Globo" Source="ms-appx:///Assets/580b585b2edbce24c47b2755.png" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True" MaxHeight="600"></Image>
-        <Button FontSize="40" RelativePanel.Below="Globo" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="20">Pulsa</Button>
-        <StackPanel RelativePanel.AlignRightWithPanel="True" Orientation="Horizontal">
-            <TextBlock FontSize="30">Puntos: </TextBlock>
-            <TextBlock></TextBlock>
+        <Button x:Name="Pulsar" FontSize="40" RelativePanel.Below="Globo" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="20">Pulsa</Button>
+        <Button FontSize="40" RelativePanel.Below="Pulsar" RelativePanel.AlignHorizontalCenterWithPanel="True" >Acabar</Button>
+        <StackPanel RelativePanel.AlignRightWithPanel="True" Orientation="Horizontal" Margin="20">
+            <TextBlock FontSize="30" Margin="0,0,12,0">Puntos:</TextBlock>
+            <TextBlock FontSize="30" Text="{Binding Path=Puntos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
         </StackPanel>
     </RelativePanel>
 </Page>

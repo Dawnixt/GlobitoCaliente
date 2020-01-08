@@ -19,8 +19,8 @@ namespace GlobitoCalienteV2_UI.ViewModel
 
         public clsMainPageVM()
         {
-            _conn = new HubConnection("https://chatsignalrderafa.azurewebsites.net");
-            _proxy = _conn.CreateHubProxy("PatoHub");
+            _conn = new HubConnection("https://serverglobitocaliente.azurewebsites.net");
+            _proxy = _conn.CreateHubProxy("GameHub");
             _conn.Start();
         }
 
@@ -72,6 +72,8 @@ namespace GlobitoCalienteV2_UI.ViewModel
                 _partidaAcabada = value;
             }
         }
+
+       
 
     }
 }
