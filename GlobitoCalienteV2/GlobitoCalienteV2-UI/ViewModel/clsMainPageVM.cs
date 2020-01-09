@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Core;
 
 namespace GlobitoCalienteV2_UI.ViewModel
 {
@@ -23,10 +24,11 @@ namespace GlobitoCalienteV2_UI.ViewModel
         public clsMainPageVM()
         {
             _pulsaciones = 0;
-            _conn = new HubConnection("https://serverglobitocaliente.azurewebsites.net");
+            //_conn = new HubConnection("https://serverglobitocaliente.azurewebsites.net");
+            _conn = new HubConnection("http://localhost:51898/signalr");
             _proxy = _conn.CreateHubProxy("GameHub");
             _conn.Start();
-            _proxy.On<int,int>("enviarPuntos",puntosRecibidos);
+            _proxy.On<int,int>("enviarPuntos", enviarPuntos);
 
             _enviarDatos = new DelegateCommand(EnviarDatos_Executed, EnviarDatos_CanExecute);
             _pulsador = new DelegateCommand(Pulsador_Executed);
@@ -39,12 +41,19 @@ namespace GlobitoCalienteV2_UI.ViewModel
         /// </summary>
         /// <param name="puntosJugador">Los puntos del jugador</param>
         /// <param name="puntosRival">Los puntos del rival</param>
-        private void puntosRecibidos(int puntosJugador,int puntosRival)
+        private async void enviarPuntos(int puntosJugador,int puntosRival)
         {
-            _puntos = puntosJugador;
-            _puntosRival = puntosRival;
-            NotifyPropertyChanged("Puntos");
-            NotifyPropertyChanged("PuntosRival");
+            await Windows.ApplicationModel.Core.CoreApplication.MainView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+
+                _puntos = puntosJugador;
+                _puntosRival = puntosRival;
+
+                NotifyPropertyChanged("Puntos");
+                NotifyPropertyChanged("PuntosRival");
+
+            });
+                
         }
 
         //Notify
@@ -72,7 +81,7 @@ namespace GlobitoCalienteV2_UI.ViewModel
         /// </summary>
         private void EnviarDatos_Executed()
         {
-            _proxy.Invoke("comprobarPulsacionesValidas", Pulsaciones);
+            _proxy.Invoke("conseguirPulsaciones", Pulsaciones);
             Pulsaciones = 0;
             NotifyPropertyChanged("Pulsaciones");
             _enviarDatos.RaiseCanExecuteChanged();

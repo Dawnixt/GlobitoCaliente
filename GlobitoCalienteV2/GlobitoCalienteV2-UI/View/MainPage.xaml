@@ -22,8 +22,16 @@
             <TextBlock FontSize="30" Text="{Binding Path=Puntos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <TextBlock FontSize="30">Veces pulsadas: </TextBlock>
-            <TextBlock FontSize="30" Text="{Binding Path=Pulsaciones, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+            <TextBlock FontSize="30" Margin="6">Veces pulsadas: </TextBlock>
+            <TextBlock FontSize="30" Margin="6" Text="{Binding Path=Pulsaciones, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+        </StackPanel>
+        <StackPanel x:Name="Puntos" RelativePanel.AlignRightWithPanel="True" Orientation="Horizontal" Margin="20">
+            <TextBlock FontSize="30" Margin="0,0,12,0">Puntos:</TextBlock>
+            <TextBlock FontSize="30" Text="{Binding Path=Puntos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+        </StackPanel>
+        <StackPanel RelativePanel.Below="Puntos" RelativePanel.AlignRightWithPanel="True" Orientation="Horizontal" Margin="20">
+            <TextBlock FontSize="30" Margin="0,0,12,0">Puntos Rival:</TextBlock>
+            <TextBlock FontSize="30" Text="{Binding Path=PuntosRival, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
         </StackPanel>
     </RelativePanel>
 </Page>
