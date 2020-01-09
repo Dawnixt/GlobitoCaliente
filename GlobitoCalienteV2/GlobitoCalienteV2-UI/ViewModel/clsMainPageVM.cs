@@ -24,11 +24,14 @@ namespace GlobitoCalienteV2_UI.ViewModel
         public clsMainPageVM()
         {
             _pulsaciones = 0;
+            _puntos = 0;
+            _puntosRival = 0;
             //_conn = new HubConnection("https://serverglobitocaliente.azurewebsites.net");
-            _conn = new HubConnection("http://localhost:51898/signalr");
+            //_conn = new HubConnection("http://localhost:51898/signalr");
+            _conn = new HubConnection("http://localhost:51898/");
             _proxy = _conn.CreateHubProxy("GameHub");
             _conn.Start();
-            _proxy.On<int,int>("enviarPuntos", enviarPuntos);
+            _proxy.On<int,int>("broadcastMessage", enviarPuntos);
 
             _enviarDatos = new DelegateCommand(EnviarDatos_Executed, EnviarDatos_CanExecute);
             _pulsador = new DelegateCommand(Pulsador_Executed);
@@ -46,9 +49,8 @@ namespace GlobitoCalienteV2_UI.ViewModel
             await Windows.ApplicationModel.Core.CoreApplication.MainView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
 
-                _puntos = puntosJugador;
-                _puntosRival = puntosRival;
-
+                Puntos = puntosJugador;
+                PuntosRival = puntosRival;
                 NotifyPropertyChanged("Puntos");
                 NotifyPropertyChanged("PuntosRival");
 

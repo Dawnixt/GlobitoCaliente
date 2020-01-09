@@ -9,7 +9,7 @@ namespace ServerGlobitoCaliente
     public class GameHub : Hub
     {
         //Esto es solo temporal no se inicializa nada aqui
-        //TODO enviar cadena de conexion para saber quien es quien
+        //TODO enviar cadena de conexion para saber quien es quien otra cosa por hacer es reiniciar los puntos de los jugadores al desconectarse
         public void enviarPuntos()
         {
             Clients.All.broadcastMessage(clsGameInfo.puntuacion1, clsGameInfo.puntuacion2);

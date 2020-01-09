@@ -14,7 +14,6 @@ namespace ServerGlobitoCaliente
         public static int pulsacion2 { get; set; }
         public static string jugador1 { get; set; }
         public static string jugador2 { get; set; }
-        //TODO Esto no va aqui va dentro de la clase GameInfo
        
     }
 }
