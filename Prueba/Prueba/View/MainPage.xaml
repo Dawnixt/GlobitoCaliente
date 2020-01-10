@@ -1,0 +1,37 @@
+﻿<Page
+    x:Class="Prueba.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Prueba"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:GlobitoCalienteV2_UI.ViewModel"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.DataContext>
+        <vm:clsMainPageVM></vm:clsMainPageVM>
+    </Page.DataContext>
+
+    <RelativePanel>
+        <Image x:Name="Globo" Source="ms-appx:///Assets/580b585b2edbce24c47b2755.png" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True" Height="300"></Image>
+        <Button Command="{Binding Path=Pulsador, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="Pulsar" FontSize="40" RelativePanel.Below="Globo" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="20">Pulsa</Button>
+        <Button Command="{Binding Path=EnviarDatos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="40" RelativePanel.Below="Pulsar" RelativePanel.AlignHorizontalCenterWithPanel="True" >Acabar</Button>
+        <StackPanel RelativePanel.AlignRightWithPanel="True" Orientation="Horizontal" Margin="20">
+            <TextBlock FontSize="30" Margin="0,0,12,0">Puntos:</TextBlock>
+            <TextBlock FontSize="30" Text="{Binding Path=Puntos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock FontSize="30" Margin="6">Veces pulsadas:</TextBlock>
+            <TextBlock FontSize="30" Margin="6" Text="{Binding Path=Pulsaciones, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+        </StackPanel>
+        <StackPanel x:Name="Puntos" RelativePanel.AlignRightWithPanel="True" Orientation="Horizontal" Margin="20">
+            <TextBlock FontSize="30" Margin="0,0,12,0">Puntos:</TextBlock>
+            <TextBlock FontSize="30" Text="{Binding Path=Puntos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+        </StackPanel>
+        <StackPanel RelativePanel.Below="Puntos" RelativePanel.AlignRightWithPanel="True" Orientation="Horizontal" Margin="20">
+            <TextBlock FontSize="30" Margin="0,0,12,0">Puntos Rival:</TextBlock>
+            <TextBlock FontSize="30" Text="{Binding Path=PuntosRival, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+        </StackPanel>
+    </RelativePanel>
+</Page>

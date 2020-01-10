@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNet.SignalR;
 
@@ -9,10 +10,11 @@ namespace ServerGlobitoCaliente
     public class GameHub : Hub
     {
         //Esto es solo temporal no se inicializa nada aqui
-        //TODO enviar cadena de conexion para saber quien es quien otra cosa por hacer es reiniciar los puntos de los jugadores al desconectarse
+        //TODO cambiar cuando se asignan las connections
         public void enviarPuntos()
         {
-            Clients.All.broadcastMessage(clsGameInfo.puntuacion1, clsGameInfo.puntuacion2);
+            Clients.Client(clsGameInfo.jugador1).broadcastMessage(clsGameInfo.puntuacion1,clsGameInfo.puntuacion2);
+            Clients.Client(clsGameInfo.jugador2).broadcastMessage(clsGameInfo.puntuacion2, clsGameInfo.puntuacion1);
         }
 
         /// <summary>
@@ -22,17 +24,21 @@ namespace ServerGlobitoCaliente
         public void conseguirPulsaciones(int pulsacion)
         {
 
-            if (clsGameInfo.jugador1.Equals(""))
+            if (clsGameInfo.jugador1 == Context.ConnectionId)
             {
                 clsGameInfo.pulsacion1 = pulsacion;
-                clsGameInfo.jugador1 = Context.ConnectionId;
+                
             }
-            else
+            else 
             {
                 clsGameInfo.pulsacion2 = pulsacion;
-                clsGameInfo.jugador2 = Context.ConnectionId;
             }
-            this.SumarPuntos();
+
+            if (clsGameInfo.pulsacion2 != 0)
+            {
+                this.SumarPuntos();
+            }
+            
         }
 
         /// <summary>
@@ -42,30 +48,62 @@ namespace ServerGlobitoCaliente
         {
             Random globoExplota = new Random();
             int explota = globoExplota.Next(1, 13);
+            bool puntuado = false;
 
-            if (clsGameInfo.pulsacion1 > explota)
+            if (clsGameInfo.pulsacion1 > explota && !puntuado)
             {
                 clsGameInfo.puntuacion2 += 1;
+                puntuado = true;
             }
-            else if (clsGameInfo.pulsacion2 > explota)
+            else if (clsGameInfo.pulsacion2 > explota && !puntuado)
             {
                 clsGameInfo.puntuacion1 += 1;
+                puntuado = true;
             }
             else
             {
-                if (clsGameInfo.pulsacion1 > clsGameInfo.pulsacion2)
+                if (clsGameInfo.pulsacion1 > clsGameInfo.pulsacion2 && !puntuado)
                 {
                     clsGameInfo.puntuacion1 += 1;
+                    puntuado = true;
                 }
-                else
+                else if(clsGameInfo.pulsacion2 > clsGameInfo.pulsacion1 && !puntuado)
                 {
                     clsGameInfo.puntuacion2 += 1;
+                    puntuado = true;
                 }
             }
 
             this.enviarPuntos();
 
         }
+
+        //Este evento ocurre cuando se inicializa la aplicacion
+        public override Task OnConnected()
+        {
+            if (clsGameInfo.jugador1.Equals(""))
+            {
+                clsGameInfo.jugador1 = Context.ConnectionId;
+            }
+            else
+            {
+                clsGameInfo.jugador2 = Context.ConnectionId;
+            }
+
+            return base.OnConnected();
+
+        }
+
+        //public override Task OnDisconnected()
+        //{
+        //    if (Context.ConnectionId == clsGameInfo.jugador1)
+        //    {
+        //        clsGameInfo.puntuacion1 = 0;
+        //        clsGameInfo.puntuacion2 = 0;
+        //    }
+
+        //    return base.OnDisconnected();
+        //}
 
         /// <summary>
         /// Nos permite asignarle un id a los jugadores
