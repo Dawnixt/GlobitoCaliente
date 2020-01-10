@@ -15,6 +15,10 @@ namespace ServerGlobitoCaliente
         {
             Clients.Client(clsGameInfo.jugador1).broadcastMessage(clsGameInfo.puntuacion1,clsGameInfo.puntuacion2);
             Clients.Client(clsGameInfo.jugador2).broadcastMessage(clsGameInfo.puntuacion2, clsGameInfo.puntuacion1);
+
+            clsGameInfo.pulsacion1 = 0;
+            clsGameInfo.pulsacion2 = 0;
+
         }
 
         /// <summary>
@@ -34,7 +38,7 @@ namespace ServerGlobitoCaliente
                 clsGameInfo.pulsacion2 = pulsacion;
             }
 
-            if (clsGameInfo.pulsacion2 != 0)
+            if (clsGameInfo.pulsacion2 != 0 && clsGameInfo.puntuacion1 != 0)
             {
                 this.SumarPuntos();
             }
@@ -94,15 +98,16 @@ namespace ServerGlobitoCaliente
 
         }
 
-        //public override Task OnDisconnected()
+        //public virtual Task OnDisconnected(bool stopCalled)
         //{
-        //    if (Context.ConnectionId == clsGameInfo.jugador1)
-        //    {
-        //        clsGameInfo.puntuacion1 = 0;
-        //        clsGameInfo.puntuacion2 = 0;
-        //    }
+            
+        //     clsGameInfo.puntuacion1 = 0;
+        //     clsGameInfo.puntuacion2 = 0;
+        //     clsGameInfo.jugador1 = "";
+        //     clsGameInfo.jugador2 = "";
+           
 
-        //    return base.OnDisconnected();
+        //    return base.OnDisconnected(stopCalled);
         //}
 
         /// <summary>
