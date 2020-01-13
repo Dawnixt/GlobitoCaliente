@@ -87,6 +87,10 @@ namespace ServerGlobitoCaliente
         {
             if (clsGameInfo.jugador1.Equals(""))
             {
+                clsGameInfo.puntuacion1 = 0;
+                clsGameInfo.puntuacion2 = 0;
+                clsGameInfo.jugador1 = "";
+                clsGameInfo.jugador2 = "";
                 clsGameInfo.jugador1 = Context.ConnectionId;
             }
             else
@@ -98,16 +102,10 @@ namespace ServerGlobitoCaliente
 
         }
 
-        //public virtual Task OnDisconnected(bool stopCalled)
+        //public virtual Task OnDisconnected(bool ex)
         //{
-            
-        //     clsGameInfo.puntuacion1 = 0;
-        //     clsGameInfo.puntuacion2 = 0;
-        //     clsGameInfo.jugador1 = "";
-        //     clsGameInfo.jugador2 = "";
-           
 
-        //    return base.OnDisconnected(stopCalled);
+        //    return base.OnDisconnected(ex);
         //}
 
         /// <summary>
