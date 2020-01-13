@@ -26,9 +26,9 @@ namespace GlobitoCalienteV2_UI.ViewModel
             _pulsaciones = 0;
             _puntos = 0;
             _puntosRival = 0;
-            _conn = new HubConnection("https://serverglobitocaliente.azurewebsites.net");
+            //_conn = new HubConnection("https://serverglobitocaliente.azurewebsites.net");
             //_conn = new HubConnection("http://localhost:51898/signalr");
-            //_conn = new HubConnection("http://localhost:51898/");
+            _conn = new HubConnection("http://localhost:51898/");
             _proxy = _conn.CreateHubProxy("GameHub");
             _conn.Start();
             _proxy.On<int,int>("broadcastMessage", enviarPuntos);

@@ -13,11 +13,9 @@ namespace ServerGlobitoCaliente
         //TODO cambiar cuando se asignan las connections
         public void enviarPuntos()
         {
+            
             Clients.Client(clsGameInfo.jugador1).broadcastMessage(clsGameInfo.puntuacion1,clsGameInfo.puntuacion2);
             Clients.Client(clsGameInfo.jugador2).broadcastMessage(clsGameInfo.puntuacion2, clsGameInfo.puntuacion1);
-
-            clsGameInfo.pulsacion1 = 0;
-            clsGameInfo.pulsacion2 = 0;
 
         }
 
@@ -38,7 +36,7 @@ namespace ServerGlobitoCaliente
                 clsGameInfo.pulsacion2 = pulsacion;
             }
 
-            if (clsGameInfo.pulsacion2 != 0 && clsGameInfo.puntuacion1 != 0)
+            if (clsGameInfo.pulsacion2 != 0)
             {
                 this.SumarPuntos();
             }
@@ -78,6 +76,9 @@ namespace ServerGlobitoCaliente
                 }
             }
 
+            clsGameInfo.pulsacion1 = 0;
+            clsGameInfo.pulsacion2 = 0;
+
             this.enviarPuntos();
 
         }
@@ -87,10 +88,10 @@ namespace ServerGlobitoCaliente
         {
             if (clsGameInfo.jugador1.Equals(""))
             {
-                clsGameInfo.puntuacion1 = 0;
-                clsGameInfo.puntuacion2 = 0;
-                clsGameInfo.jugador1 = "";
-                clsGameInfo.jugador2 = "";
+                //clsGameInfo.puntuacion1 = 0;
+                //clsGameInfo.puntuacion2 = 0;
+                //clsGameInfo.jugador1 = "";
+                //clsGameInfo.jugador2 = "";
                 clsGameInfo.jugador1 = Context.ConnectionId;
             }
             else
@@ -108,20 +109,20 @@ namespace ServerGlobitoCaliente
         //    return base.OnDisconnected(ex);
         //}
 
-        /// <summary>
-        /// Nos permite asignarle un id a los jugadores
-        /// </summary>
-        public void asignarJugador()
-        {
-            if (clsGameInfo.jugador1.Equals(""))
-            {
-                clsGameInfo.jugador1 = Context.ConnectionId;
-            }
-            else
-            {
-                clsGameInfo.jugador2 = Context.ConnectionId;
-            }
+        ///// <summary>
+        ///// Nos permite asignarle un id a los jugadores
+        ///// </summary>
+        //public void asignarJugador()
+        //{
+        //    if (clsGameInfo.jugador1.Equals(""))
+        //    {
+        //        clsGameInfo.jugador1 = Context.ConnectionId;
+        //    }
+        //    else
+        //    {
+        //        clsGameInfo.jugador2 = Context.ConnectionId;
+        //    }
 
-        }
+        //}
     }
 }
