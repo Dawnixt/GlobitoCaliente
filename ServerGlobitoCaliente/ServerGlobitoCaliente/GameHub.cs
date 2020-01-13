@@ -10,7 +10,7 @@ namespace ServerGlobitoCaliente
     public class GameHub : Hub
     {
         //Esto es solo temporal no se inicializa nada aqui
-        //TODO cambiar cuando se asignan las connections
+        //TODO crear boton salir 
         public void enviarPuntos()
         {
             
@@ -36,7 +36,7 @@ namespace ServerGlobitoCaliente
                 clsGameInfo.pulsacion2 = pulsacion;
             }
 
-            if (clsGameInfo.pulsacion2 != 0)
+            if (clsGameInfo.pulsacion2 != 0 && clsGameInfo.pulsacion1 != 0)
             {
                 this.SumarPuntos();
             }
@@ -103,11 +103,14 @@ namespace ServerGlobitoCaliente
 
         }
 
-        //public virtual Task OnDisconnected(bool ex)
-        //{
-
-        //    return base.OnDisconnected(ex);
-        //}
+        public virtual Task OnDisconnected(bool ex)
+        {
+            clsGameInfo.puntuacion1 = 0;
+            clsGameInfo.puntuacion2 = 0;
+            clsGameInfo.jugador1 = "";
+            clsGameInfo.jugador2 = "";
+            return base.OnDisconnected(ex);
+        }
 
         ///// <summary>
         ///// Nos permite asignarle un id a los jugadores
