@@ -20,6 +20,26 @@ namespace ServerGlobitoCaliente
         }
 
         /// <summary>
+        /// Este metodo prepara las cosas para la siguiente partida
+        /// </summary>
+        public void acabarPartida()
+        {
+            clsGameInfo.puntuacion1 = 0;
+            clsGameInfo.puntuacion2 = 0;
+            clsGameInfo.pulsacion1 = 0;
+            clsGameInfo.pulsacion2 = 0;
+
+            if (Context.ConnectionId == clsGameInfo.jugador1)
+            {
+                clsGameInfo.jugador1 = "";
+            }
+            else
+            {
+                clsGameInfo.jugador2 = "";
+            }
+        }
+
+        /// <summary>
         /// Nos permite conseguir las pulsaciones de los usuarios
         /// </summary>
         /// <param name="pulsacion">Las veces que ha pulsado el jugador</param>

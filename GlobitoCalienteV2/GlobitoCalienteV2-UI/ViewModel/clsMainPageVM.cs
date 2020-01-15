@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
 
 namespace GlobitoCalienteV2_UI.ViewModel
@@ -17,6 +18,7 @@ namespace GlobitoCalienteV2_UI.ViewModel
         private int _puntosRival;
         private DelegateCommand _pulsador;
         private DelegateCommand _enviarDatos;
+        private DelegateCommand _acabarPartida;
         private HubConnection _conn;
         private IHubProxy _proxy;
 
@@ -35,7 +37,10 @@ namespace GlobitoCalienteV2_UI.ViewModel
 
             _enviarDatos = new DelegateCommand(EnviarDatos_Executed, EnviarDatos_CanExecute);
             _pulsador = new DelegateCommand(Pulsador_Executed);
+            _acabarPartida = new DelegateCommand(Acabar_Partida_Executed);
         }
+
+        
 
         //Cosas extra
 
@@ -66,6 +71,15 @@ namespace GlobitoCalienteV2_UI.ViewModel
         }
 
         //Funciones extra
+
+        /// <summary>
+        /// Este evento ocurre al pulsar el boton acabar partida
+        /// </summary>
+        private void Acabar_Partida_Executed()
+        {
+            _proxy.Invoke("acabarPartida");
+            CoreApplication.Exit();
+        }
 
         /// <summary>
         /// Este evento se activa  al pulsar el pulsador y le suma uno a las pulsaciones
@@ -125,6 +139,14 @@ namespace GlobitoCalienteV2_UI.ViewModel
             set
             {
                 _proxy = value;
+            }
+        }
+
+        public DelegateCommand AcabarPartida
+        {
+            get
+            {
+                return _acabarPartida;
             }
         }
 

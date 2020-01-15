@@ -16,8 +16,9 @@
     <RelativePanel>
         <Image x:Name="Globo" Source="ms-appx:///Assets/580b585b2edbce24c47b2755.png" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True" Height="300"></Image>
         <Button Command="{Binding Path=Pulsador, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="Pulsar" FontSize="40" RelativePanel.Below="Globo" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="20">Pulsa</Button>
-        <Button Command="{Binding Path=EnviarDatos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="40" RelativePanel.Below="Pulsar" RelativePanel.AlignHorizontalCenterWithPanel="True" >Acabar</Button>
-        <StackPanel RelativePanel.AlignRightWithPanel="True" Orientation="Horizontal" Margin="20">
+        <Button x:Name="btnAcabar" Command="{Binding Path=EnviarDatos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="40" RelativePanel.Below="Pulsar" RelativePanel.AlignHorizontalCenterWithPanel="True" >Acabar</Button>
+        <Button x:Name="AcabarJugar" Command="{Binding Path=AcabarPartida, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="40" RelativePanel.Below="btnAcabar" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="12" >Acabar Partida</Button>
+        <StackPanel RelativePanel.AlignRightWithPanel="True" Orientation="Horizontal" Margin="20" >
             <TextBlock FontSize="30" Margin="0,0,12,0">Puntos:</TextBlock>
             <TextBlock FontSize="30" Text="{Binding Path=Puntos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
         </StackPanel>
